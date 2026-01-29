@@ -19,12 +19,17 @@ public class ReservationService : IReservationService
 
         lock (_lock)
         {
+            var existingReservation = _database.FirstOrDefault(r => r.Date == request.ReservationDate.Date && r.IdFoodtruck == request.IdFoodTruck && !r.IsCancelled);
+            if (existingReservation is not null)
+            {
+                throw new InvalidOperationException("Il y a déjà une réservation pour ce foodtruck à cette date");
+            }
             int dayCapacity = (request.ReservationDate.DayOfWeek == DayOfWeek.Friday)
                 ? BusinessRules.TotalCapacityUnits - BusinessRules.FridayUnitReduction
                 : BusinessRules.TotalCapacityUnits;
 
             int occupiedUnits = _database
-                .Where(r => r.Date.Date == request.ReservationDate.Date && !r.IsCancelled)
+                .Where(r => r.Date == request.ReservationDate.Date && !r.IsCancelled)
                 .Sum(r => r.Size == TruckSize.Large ? BusinessRules.LargeTruckUnits : BusinessRules.SmallTruckUnits);
 
             int requestedUnits = request.Size == TruckSize.Large ? BusinessRules.LargeTruckUnits : BusinessRules.SmallTruckUnits;

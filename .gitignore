@@ -1,0 +1,45 @@
+## [ Utilitaires de build et dossiers de sortie ]
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+## [ Visual Studio ]
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+## [ VS Code ]
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## [ Rider / JetBrains ]
+.idea/
+*.sln.iml
+
+## [ Fichiers de configuration utilisateur (Secrets) ]
+appsettings.json
+!appsettings.json
+# On ignore les fichiers secrets ou locaux spécifiques
+*.Secrets.json
+usersecrets.id
+
+## [ Tests et Couverture ]
+TestResults/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dll
+*.exe
+*.pdb
+*.log
+
+## [ OS spécifiques ]
+.DS_Store
+Thumbs.db
