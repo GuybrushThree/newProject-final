@@ -1,5 +1,7 @@
-var builder = WebApplication.CreateBuilder(args);
+using API.Application;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IReservationService, ReservationService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
